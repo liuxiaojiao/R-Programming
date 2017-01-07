@@ -32,9 +32,28 @@ cacheSolve <- function(x, ...) {
   if(!is.null(inv)) {
     message('getting cached data')
     return(inv)
-  }
+  } ## first checks if the inverse has been calculated. if so, skips the inverse.
   data <- x$get()
-  inv <- solve(data)
+  inv <- solve(data) #Square matrix inverse function
   x$setinverse(inv)
   inv
 }
+
+
+
+
+
+#####check the result:
+### x <- matrix(c(2, 4, 6, 8, 5, 4, 3, 7, 2), nrow=3, ncol=3)
+### example <- makeCacheMatrix(x)
+### example$get()
+###      [,1] [,2] [,3]
+###[1,]    2    8   3
+###[2,]    4    5   7
+###[3,]    6    4   2
+###
+### cacheSolve(example)
+###      [,1]        [,2]        [,3]
+###[1,] -0.09278351 -0.02061856  0.21134021
+###[2,]  0.17525773 -0.07216495 -0.01030928
+###[3,] -0.07216495  0.20618557 -0.11340206
